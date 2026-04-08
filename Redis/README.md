@@ -50,7 +50,7 @@ npm start
 
 Test:
 
-```
+```text
 http://localhost:3000/api?user=test
 ```
 
@@ -60,7 +60,7 @@ http://localhost:3000/api?user=test
 
 Check and try to change the logic inside:
 
-```
+```text
 src/rateLimiter.js
 ```
 
@@ -71,9 +71,10 @@ Default Behavior:
 * Automatically resets after time window
 
 Try to:
-- increate the number of max request
-- reduce the TTL
-- ...
+
+* increate the number of max request
+* reduce the TTL
+* ...
 
 ---
 
@@ -89,7 +90,7 @@ Redis commands you will need:
 
 ## 📁 Project Structure
 
-```
+```text
 src/
  ├── server.js
  ├── routes.js

@@ -1,11 +1,11 @@
 import { createClient } from "redis";
 
 const client = createClient({
-    username: 'YOUR_USERNAME',
-    password: 'YOUR_PASSWORD',
+    username: 'default',
+    password: 'w5CIyvsv79leioIBfbWIAwNS1xrHIuwx',
     socket: {
-        host: 'YOUR_REDIS_CLOUD_HOST',
-        port: YOUR_REDIS_CLOUD_PORT
+        host: 'redis-13394.crce202.eu-west-3-1.ec2.cloud.redislabs.com',
+        port: 13394
     }
 });
 
