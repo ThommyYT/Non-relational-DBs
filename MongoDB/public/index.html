@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mongo Todo</title>
+</head>
+<body>
+  <h1>Todo App</h1>
+
+  <input id="todoInput" placeholder="Enter todo" />
+  <button onclick="addTodo()">Add</button>
+
+  <ul id="todoList"></ul>
+
+  <script>
+    async function fetchTodos() {
+      const res = await fetch('/todos');
+      const todos = await res.json();
+
+      const list = document.getElementById('todoList');
+      list.innerHTML = '';
+
+      todos.forEach(t => {
+        const li = document.createElement('li');
+
+        const span = document.createElement('span');
+        span.innerText = t.text;
+
+        const editBtn = document.createElement('button');
+        editBtn.innerText = 'Edit';
+        editBtn.onclick = () => updateTodo(t._id);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = 'Delete';
+        deleteBtn.onclick = () => deleteTodo(t._id);
+
+        li.appendChild(span);
+        li.appendChild(editBtn);
+        li.appendChild(deleteBtn);
+
+        list.appendChild(li);
+      });
+    }
+
+    async function addTodo() {
+      const input = document.getElementById('todoInput');
+      const text = input.value;
+
+      await fetch('/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+
+      input.value = '';
+      fetchTodos();
+    }
+
+    async function updateTodo(id) {
+      const newText = prompt('Update todo:');
+      if (!newText) return;
+
+      await fetch(`/todos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: newText })
+      });
+
+      fetchTodos();
+    }
+
+    async function deleteTodo(id) {
+      await fetch(`/todos/${id}`, {
+        method: 'DELETE'
+      });
+
+      fetchTodos();
+    }
+
+    fetchTodos();
+  </script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 import { Client } from "cassandra-driver";
 import dotenv from "dotenv";
+import dns from "dns";
 
+dns.setServers(["1.1.1.1"]);
 dotenv.config();
 
 const client = new Client({
@@ -15,7 +17,7 @@ const client = new Client({
 });
 
 (async () => {
-  await client.connect();
+    await client.connect();
   console.log("Connected to Astra DB");
 })();
 
